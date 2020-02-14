@@ -15,15 +15,12 @@ const resetStyles = `
     -webkit-font-smoothing: subpixel-antialiased;
   }
 
-  .fonts-loaded body {
-    // font-family: ;
-  }
-
   #__next {
     position: relative;
     overflow: auto;
     width: 100%;
     height: 100%;
+    min-height:100vh;
   }
 `;
 export default class MyDocument extends Document {

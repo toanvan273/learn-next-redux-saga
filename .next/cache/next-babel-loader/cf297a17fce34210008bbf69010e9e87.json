@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var host = 'http://5cd12f0fd4a78300147be564.mockapi.io';","map":{"version":3,"sources":["C:/Users/toan.truong/Desktop/Custom/template-custom/host.js"],"names":["host"],"mappings":"AAAA,OAAO,IAAMA,IAAI,GAAG,4CAAb","sourcesContent":["export const host = 'http://5cd12f0fd4a78300147be564.mockapi.io'"]},"metadata":{},"sourceType":"module"}
