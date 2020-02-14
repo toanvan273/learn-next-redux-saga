@@ -1,13 +1,14 @@
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import Layout from '../components/MyLayout.js'
 
 const Page = () => {
-  const router = useRouter()
-
+  // const router = useRouter()
+  // console.log('r',router);
+  
   return (
     <Layout>
-      <h1>{router.query.title}</h1>
-      <p>This is the blog post content.</p>
+      {/* <h1>{router.query}</h1> */}
+      <p>POST PAGE.</p>
     </Layout>
   )
 }

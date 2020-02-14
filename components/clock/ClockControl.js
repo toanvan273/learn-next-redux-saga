@@ -7,7 +7,7 @@ const format = t => {
     return `${n(hours)}:${n(mins)}:${n(seconds)}`
 }
 function ClockControl({ lastUpdate, light }) {
-   console.log('ClockControl', lastUpdate, light);
+//    console.log('ClockControl', lastUpdate, light);
    
     return (
         <div className={light ? 'light' : ''}>

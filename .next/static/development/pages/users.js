@@ -43,7 +43,7 @@ var getUserErr = function getUserErr(err) {
 /*!*************************!*\
   !*** ./action/types.js ***!
   \*************************/
-/*! exports provided: TEST_GET_METHOD, TEST_GET_SUCCESS, TEST_GET_METHOD_ERR */
+/*! exports provided: TEST_GET_METHOD, TEST_GET_SUCCESS, TEST_GET_METHOD_ERR, TICK_CLOCK, START_CLOCK, LOAD_DATASAGA, LOAD_DATASAGA_SUCCESS, LOAD_DATASAGA_ERR */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51,9 +51,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEST_GET_METHOD", function() { return TEST_GET_METHOD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEST_GET_SUCCESS", function() { return TEST_GET_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEST_GET_METHOD_ERR", function() { return TEST_GET_METHOD_ERR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TICK_CLOCK", function() { return TICK_CLOCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "START_CLOCK", function() { return START_CLOCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_DATASAGA", function() { return LOAD_DATASAGA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_DATASAGA_SUCCESS", function() { return LOAD_DATASAGA_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_DATASAGA_ERR", function() { return LOAD_DATASAGA_ERR; });
 var TEST_GET_METHOD = 'TEST_GET_METHOD';
 var TEST_GET_SUCCESS = 'TEST_GET_SUCCESS';
 var TEST_GET_METHOD_ERR = 'TEST_GET_METHOD_ERR';
+var TICK_CLOCK = 'TICK_CLOCK';
+var START_CLOCK = 'START_CLOCK';
+var LOAD_DATASAGA = 'LOAD_DATASAGA';
+var LOAD_DATASAGA_SUCCESS = 'LOAD_DATASAGA_SUCCESS';
+var LOAD_DATASAGA_ERR = 'LOAD_DATASAGA_ERR';
 
 /***/ }),
 
@@ -141,7 +151,21 @@ function Header() {
       lineNumber: 20
     },
     __self: this
-  }, "Clock")));
+  }, "Clock")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/post",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: this
+  }, __jsx("a", {
+    style: linkStyle,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: this
+  }, "Post")));
 }
 
 /***/ }),
@@ -16234,7 +16258,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!********************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fusers&absolutePagePath=C%3A%5CUsers%5Ctoan.truong%5CDesktop%5CCustom%5Ctemplate-custom%5Cpages%5Cusers.js ***!
   \********************************************************************************************************************************************************/
@@ -16257,5 +16281,5 @@ module.exports = dll_5f137288facb1107b491;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
+},[[4,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=users.js.map

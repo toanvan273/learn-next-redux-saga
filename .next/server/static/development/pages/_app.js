@@ -93,6 +93,50 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./action/clockAction.js":
+/*!*******************************!*\
+  !*** ./action/clockAction.js ***!
+  \*******************************/
+/*! exports provided: tickClock, startClock, loadDataSaga, loadDataSagaSuccess, loadDataSagaErr */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tickClock", function() { return tickClock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startClock", function() { return startClock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadDataSaga", function() { return loadDataSaga; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadDataSagaSuccess", function() { return loadDataSagaSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadDataSagaErr", function() { return loadDataSagaErr; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./action/types.js");
+
+const tickClock = isServer => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["TICK_CLOCK"],
+    light: !isServer,
+    ts: Date.now()
+  };
+};
+const startClock = () => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["START_CLOCK"]
+  };
+};
+const loadDataSaga = () => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_DATASAGA"]
+  };
+};
+const loadDataSagaSuccess = data => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_DATASAGA_SUCCESS"],
+  data
+});
+const loadDataSagaErr = err => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_DATASAGA_ERR"],
+  err
+});
+
+/***/ }),
+
 /***/ "./action/testAction.js":
 /*!******************************!*\
   !*** ./action/testAction.js ***!
@@ -132,7 +176,7 @@ const getUserErr = err => ({
 /*!*************************!*\
   !*** ./action/types.js ***!
   \*************************/
-/*! exports provided: TEST_GET_METHOD, TEST_GET_SUCCESS, TEST_GET_METHOD_ERR */
+/*! exports provided: TEST_GET_METHOD, TEST_GET_SUCCESS, TEST_GET_METHOD_ERR, TICK_CLOCK, START_CLOCK, LOAD_DATASAGA, LOAD_DATASAGA_SUCCESS, LOAD_DATASAGA_ERR */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -140,9 +184,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEST_GET_METHOD", function() { return TEST_GET_METHOD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEST_GET_SUCCESS", function() { return TEST_GET_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TEST_GET_METHOD_ERR", function() { return TEST_GET_METHOD_ERR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TICK_CLOCK", function() { return TICK_CLOCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "START_CLOCK", function() { return START_CLOCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_DATASAGA", function() { return LOAD_DATASAGA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_DATASAGA_SUCCESS", function() { return LOAD_DATASAGA_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_DATASAGA_ERR", function() { return LOAD_DATASAGA_ERR; });
 const TEST_GET_METHOD = 'TEST_GET_METHOD';
 const TEST_GET_SUCCESS = 'TEST_GET_SUCCESS';
 const TEST_GET_METHOD_ERR = 'TEST_GET_METHOD_ERR';
+const TICK_CLOCK = 'TICK_CLOCK';
+const START_CLOCK = 'START_CLOCK';
+const LOAD_DATASAGA = 'LOAD_DATASAGA';
+const LOAD_DATASAGA_SUCCESS = 'LOAD_DATASAGA_SUCCESS';
+const LOAD_DATASAGA_ERR = 'LOAD_DATASAGA_ERR';
 
 /***/ }),
 
@@ -578,6 +632,50 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_0___default.a {
 
 /***/ }),
 
+/***/ "./reducer/clockReducer.js":
+/*!*********************************!*\
+  !*** ./reducer/clockReducer.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return clockReducer; });
+/* harmony import */ var _action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../action/types */ "./action/types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+const initialState = {
+  lastUpdate: 0,
+  light: false,
+  dataSaga: null
+};
+function clockReducer(state = initialState, action) {
+  // console.log('action :', action);
+  switch (action.type) {
+    case _action_types__WEBPACK_IMPORTED_MODULE_0__["TICK_CLOCK"]:
+      return _objectSpread({}, state, {}, {
+        lastUpdate: action.ts,
+        light: action.light
+      });
+
+    case _action_types__WEBPACK_IMPORTED_MODULE_0__["LOAD_DATASAGA_SUCCESS"]:
+      return _objectSpread({}, state, {
+        dataSaga: action.data
+      });
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
 /***/ "./reducer/rootReducer.js":
 /*!********************************!*\
   !*** ./reducer/rootReducer.js ***!
@@ -590,10 +688,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _testReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./testReducer */ "./reducer/testReducer.js");
+/* harmony import */ var _clockReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./clockReducer */ "./reducer/clockReducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  testReducer: _testReducer__WEBPACK_IMPORTED_MODULE_1__["default"] // 
+  testReducer: _testReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  clockReducer: _clockReducer__WEBPACK_IMPORTED_MODULE_2__["default"] // 
 
 }));
 
@@ -641,6 +742,55 @@ function userReducer(state = initialSate, action) {
 
 /***/ }),
 
+/***/ "./saga/clockSaga.js":
+/*!***************************!*\
+  !*** ./saga/clockSaga.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../action/types */ "./action/types.js");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _action_clockAction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../action/clockAction */ "./action/clockAction.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+
+function* runClockSaga() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["take"])(_action_types__WEBPACK_IMPORTED_MODULE_0__["START_CLOCK"]); // while(true) {
+  //     yield put(tickClock(true))
+  //     yield delay(1000)
+  // }
+}
+
+function* loadDataSaga() {
+  try {
+    const res = yield axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('https://jsonplaceholder.typicode.com/users');
+    console.log(res);
+    const {
+      data
+    } = res;
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(_action_clockAction__WEBPACK_IMPORTED_MODULE_2__["loadDataSagaSuccess"](data));
+  } catch (err) {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(_action_clockAction__WEBPACK_IMPORTED_MODULE_2__["loadDataSagaErr"](err));
+  }
+}
+
+function* wathGetDataSaga() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(runClockSaga), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_action_types__WEBPACK_IMPORTED_MODULE_0__["LOAD_DATASAGA"], loadDataSaga)]);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (wathGetDataSaga);
+
+/***/ }),
+
 /***/ "./saga/rootSaga.js":
 /*!**************************!*\
   !*** ./saga/rootSaga.js ***!
@@ -653,11 +803,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _testSaga__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./testSaga */ "./saga/testSaga.js");
+/* harmony import */ var _clockSaga__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./clockSaga */ "./saga/clockSaga.js");
+
 
 
 
 function* rootSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([_testSaga__WEBPACK_IMPORTED_MODULE_1__["default"] // 
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(_clockSaga__WEBPACK_IMPORTED_MODULE_2__["default"]), _testSaga__WEBPACK_IMPORTED_MODULE_1__["default"] // runClockSaga
+  // 
   ]);
 }
 
@@ -695,8 +848,8 @@ function* getUserSaga() {
 
     const {
       data
-    } = res;
-    console.log('data', data);
+    } = res; // console.log('data',data);
+
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])(Object(_action_testAction__WEBPACK_IMPORTED_MODULE_2__["getUserSuccess"])(data));
   } catch (err) {
     console.log(err);

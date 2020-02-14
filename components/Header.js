@@ -19,6 +19,9 @@ export default function Header() {
       <Link href="/clock">
         <a style={linkStyle}>Clock</a>
       </Link>
+      <Link href="/post">
+        <a style={linkStyle}>Post</a>
+      </Link>
     </div>
   )
 }

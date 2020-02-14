@@ -12,8 +12,7 @@ function* getUserSaga(){
         console.log(res);
         // const data = yield res.jon()
         const {data} = res
-        console.log('data',data);
-        
+        // console.log('data',data);
         yield put(getUserSuccess(data))
     }catch(err){
         console.log(err);
