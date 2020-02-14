@@ -14809,7 +14809,7 @@ routes.add('clock');
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /*!********************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fclock&absolutePagePath=C%3A%5CUsers%5Ctoan.truong%5CDesktop%5CCustom%5Ctemplate-custom%5Cpages%5Cclock.js ***!
   \********************************************************************************************************************************************************/
@@ -14832,5 +14832,5 @@ module.exports = dll_5f137288facb1107b491;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=clock.js.map

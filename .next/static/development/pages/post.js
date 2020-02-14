@@ -10755,7 +10755,7 @@ routes.add('clock');
 
 /***/ }),
 
-/***/ 2:
+/***/ 4:
 /*!******************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fpost&absolutePagePath=C%3A%5CUsers%5Ctoan.truong%5CDesktop%5CCustom%5Ctemplate-custom%5Cpages%5Cpost.js ***!
   \******************************************************************************************************************************************************/
@@ -10778,5 +10778,5 @@ module.exports = dll_5f137288facb1107b491;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[4,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=post.js.map
