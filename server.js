@@ -10,11 +10,16 @@ app.prepare()
         const server = express()
         // server.use(handler).listen(3000)
         server.use(handler)
-        server.get('*',(req,res)=> {
-            return handler(req,res)
+        server.get('*', (req, res) => {
+            return handler(req, res)
         })
-        server.listen(9000, err=>{
-            if(err) throw err
+        server.get('/about/:id', (req, res) => {
+            const params = { id: req.params.id };
+            return app.render(req, res, '/about', params);
+        });
+
+        server.listen(9000, err => {
+            if (err) throw err
             console.log(`Hello Ready on http://localhost:9000`);
         })
     }

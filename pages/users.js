@@ -44,14 +44,13 @@ const Bound = styled.div`
 
 class MainUsers extends React.Component {
   static async getInitialProps({ ctx: { store } }) {
-    // console.log('getInitialProps: ', store);
-    store.dispatch(getUser())
+    // store.dispatch(getUser())
   }
   state = {
     users: []
   }
   componentDidMount() {
-    // this.props.getUser()
+    this.props.getUser()
   }
   UNSAFE_componentWillReceiveProps(n) {
     if (this.props.usersReducer !== n.usersReducer) {
@@ -63,7 +62,8 @@ class MainUsers extends React.Component {
   }
   onAddNew = () => {
     console.log('click');
-    Router.pushRoute('users', {name:'add'})
+    Router.pushRoute('addUser')
+    // Router.pushRoute('/users/add')
   }
   render() {
     const { users } = this.state
@@ -75,7 +75,6 @@ class MainUsers extends React.Component {
             <p>Users Page.</p>
             <button onClick={this.onAddNew}>Add New</button>
           </div>
-
           <div className='main-table-user'>
             <div className='head-table'>
               <div className='headitem'>STT</div>
@@ -98,7 +97,6 @@ class MainUsers extends React.Component {
                 </div>
               ))
               }
-
             </div>
           </div>
         </Bound>
