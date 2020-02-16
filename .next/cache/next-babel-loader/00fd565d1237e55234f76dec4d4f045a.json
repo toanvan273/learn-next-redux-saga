@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var host = 'api.com.vn';","map":{"version":3,"sources":["C:/Users/toan.truong/Desktop/Custom/template-custom/host.js"],"names":["host"],"mappings":"AAAA,OAAO,IAAMA,IAAI,GAAG,YAAb","sourcesContent":["export const host = 'api.com.vn'"]},"metadata":{},"sourceType":"module"}
