@@ -2,15 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Layout from '../components/MyLayout.js'
 import styled from "styled-components";
-// import withReduxSaga from '../lib/withReduxSaga'
+import {Router} from '../routes'
 // actions
 import { getUser } from '../action/testAction'
 const Bound = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
-    .main-table-user{
-
+    .main-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     .head-table{
         display: grid;
@@ -41,69 +43,77 @@ const Bound = styled.div`
 `;
 
 class MainUsers extends React.Component {
-    static async getInitialProps({ ctx: { store } }) {
-        console.log('getInitialProps: ', store);
-        // store.dispatch(getUser())
+  static async getInitialProps({ ctx: { store } }) {
+    // console.log('getInitialProps: ', store);
+    store.dispatch(getUser())
+  }
+  state = {
+    users: []
+  }
+  componentDidMount() {
+    // this.props.getUser()
+  }
+  UNSAFE_componentWillReceiveProps(n) {
+    if (this.props.usersReducer !== n.usersReducer) {
+      console.log('componentWillReceiveProps', n.usersReducer);
+      this.setState({
+        users: n.usersReducer.data
+      })
     }
-    state = {
-        users: []
-    }
-    componentDidMount() {
-        this.props.getUser()
-    }
-    UNSAFE_componentWillReceiveProps(n) {
-        if (this.props.usersReducer !== n.usersReducer) {
-            console.log('componentWillReceiveProps', n.usersReducer);
-            this.setState({
-                users: n.usersReducer.data
-            })
-        }
-    }
-    render() {
-        const { users } = this.state
-        // console.log('render ', users);
-        return (
-            <Layout>
-                <Bound>
-                    <p>Users Page.</p>
-                    <div className='main-table-user'>
-                        <div className='head-table'>
-                            <div className='headitem'>STT</div>
-                            <div className='headitem'>Full Name</div>
-                            <div className='headitem'>Job</div>
-                            <div className='headitem'>Phone</div>
-                        </div>
-                        <div className='body-table'>
-                            {users && users.map((user, index) => (
-                                <div className='block-row' key={index}>
-                                    <div className='humenitem'>{index + 1}</div>
-                                    <div className='full-name '>
-                                        <div className='avatar'>
-                                            <img src={user.avatar} alt='user' />
-                                        </div>
-                                        <p>{user.name}</p>
-                                    </div>
-                                    <div className='humenitem'>{user.job}</div>
-                                    <div className='humenitem'>{user.phone}</div>
-                                </div>
-                            ))
-                            }
+  }
+  onAddNew = () => {
+    console.log('click');
+    Router.pushRoute('users', {name:'add'})
+  }
+  render() {
+    const { users } = this.state
+    // console.log('render ', users);
+    return (
+      <Layout>
+        <Bound>
+          <div className='main-title'>
+            <p>Users Page.</p>
+            <button onClick={this.onAddNew}>Add New</button>
+          </div>
 
-                        </div>
+          <div className='main-table-user'>
+            <div className='head-table'>
+              <div className='headitem'>STT</div>
+              <div className='headitem'>Full Name</div>
+              <div className='headitem'>Job</div>
+              <div className='headitem'>Phone</div>
+            </div>
+            <div className='body-table'>
+              {users && users.map((user, index) => (
+                <div className='block-row' key={index}>
+                  <div className='humenitem'>{index + 1}</div>
+                  <div className='full-name '>
+                    <div className='avatar'>
+                      <img src={user.avatar} alt='user' />
                     </div>
-                </Bound>
-            </Layout>
-        )
-    }
+                    <p>{user.name}</p>
+                  </div>
+                  <div className='humenitem'>{user.job}</div>
+                  <div className='humenitem'>{user.phone}</div>
+                </div>
+              ))
+              }
+
+            </div>
+          </div>
+        </Bound>
+      </Layout>
+    )
+  }
 }
 const mapDispatchToProps = dispatch => ({
-    getUser: () => dispatch(getUser()),
+  getUser: () => dispatch(getUser()),
 })
 
 const mapStateToProps = (state) => {
-    return {
-        usersReducer: state.testReducer
-    }
+  return {
+    usersReducer: state.testReducer
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainUsers)
