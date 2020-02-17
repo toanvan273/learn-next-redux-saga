@@ -21,10 +21,10 @@ function* loadDataSaga() {
         yield put(action.loadDataSagaErr(err))
     }
 }
-function* wathGetDataSaga(){
+function* clockSaga(){
     yield all([
         call(runClockSaga),
         takeLatest(types.LOAD_DATASAGA, loadDataSaga)
     ])
 }
-export default wathGetDataSaga
+export default clockSaga

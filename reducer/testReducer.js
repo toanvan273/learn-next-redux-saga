@@ -7,12 +7,12 @@ export const initialSate = {
 
 export default function userReducer(state = initialSate, action) {
     switch (action.type) {
-        case types.TEST_GET_SUCCESS:
+        case types.GET_USER_SUCCESS:
             return {
                 ...state,
                 data: action.data
             }
-        case types.TEST_GET_METHOD_ERR:
+        case types.GET_USER_ERR:
             return {
                 ...state,
                 err: action.err

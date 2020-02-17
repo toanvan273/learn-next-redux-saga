@@ -1,12 +1,10 @@
-import {all, call} from 'redux-saga/effects'
-import testSaga from './testSaga'
-import runClockSaga from './clockSaga'
+import { all, call, fork } from 'redux-saga/effects'
+import userSaga from './userSaga'
+import clockSaga from './clockSaga'
 function* rootSaga() {
     yield all([
-        call(runClockSaga),
-        testSaga,
-        // runClockSaga
-        // 
+        yield fork(userSaga),
+        yield fork(clockSaga)
     ])
 }
 export default rootSaga

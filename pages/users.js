@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Layout from '../components/MyLayout.js'
 import styled from "styled-components";
-import {Router} from '../routes'
+import { Router } from '../routes'
 // actions
-import { getUser } from '../action/testAction'
+import { getUser } from '../action/userAction'
 const Bound = styled.div`
     display: flex;
     flex: 1;
@@ -47,27 +47,25 @@ class MainUsers extends React.Component {
     // store.dispatch(getUser())
   }
   state = {
-    users: []
+    users: null
   }
   componentDidMount() {
     this.props.getUser()
   }
   UNSAFE_componentWillReceiveProps(n) {
     if (this.props.usersReducer !== n.usersReducer) {
-      console.log('componentWillReceiveProps', n.usersReducer);
       this.setState({
         users: n.usersReducer.data
       })
     }
   }
   onAddNew = () => {
-    console.log('click');
     Router.pushRoute('addUser')
-    // Router.pushRoute('/users/add')
   }
   render() {
     const { users } = this.state
-    // console.log('render ', users);
+    console.log('render :', users);
+    
     return (
       <Layout>
         <Bound>

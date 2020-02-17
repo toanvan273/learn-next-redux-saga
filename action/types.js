@@ -1,6 +1,6 @@
-export const TEST_GET_METHOD = 'TEST_GET_METHOD'
-export const TEST_GET_SUCCESS = 'TEST_GET_SUCCESS'
-export const TEST_GET_METHOD_ERR = 'TEST_GET_METHOD_ERR'
+export const GET_USER = 'GET_USER'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+export const GET_USER_ERR = 'GET_USER_ERR'
 
 export const TICK_CLOCK = 'TICK_CLOCK'
 export const START_CLOCK = 'START_CLOCK'
@@ -8,3 +8,6 @@ export const START_CLOCK = 'START_CLOCK'
 export const LOAD_DATASAGA = 'LOAD_DATASAGA'
 export const LOAD_DATASAGA_SUCCESS = 'LOAD_DATASAGA_SUCCESS'
 export const LOAD_DATASAGA_ERR = 'LOAD_DATASAGA_ERR'
+
+export const ADD_USER = 'ADD_USER'
+export const ADD_USER_ERR = 'ADD_USER_ERR'
