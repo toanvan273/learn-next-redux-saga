@@ -4,7 +4,7 @@ import Layout from '../components/MyLayout.js'
 import styled from "styled-components";
 import { Router } from '../routes'
 // actions
-import { getUser } from '../action/userAction'
+import { getUser ,deleteUser} from '../action/userAction'
 const Bound = styled.div`
     display: flex;
     flex: 1;
@@ -16,14 +16,14 @@ const Bound = styled.div`
     }
     .head-table{
         display: grid;
-        grid-template-columns: 10% 40% 25% 25%;
+        grid-template-columns: 10% 40% 25% 20% 5%;
         font-weight:bold;
         margin-bottom:10px;
     }
     .body-table{
         .block-row{
             display: grid;
-            grid-template-columns: 10% 40% 25% 25%;
+            grid-template-columns: 10% 40% 25% 20% 5%;
             margin-bottom: 10px;
             .full-name{
                 display: flex;
@@ -53,19 +53,26 @@ class MainUsers extends React.Component {
     this.props.getUser()
   }
   UNSAFE_componentWillReceiveProps(n) {
+    // console.log('will',n.usersReducer.type);
     if (this.props.usersReducer !== n.usersReducer) {
       this.setState({
         users: n.usersReducer.data
       })
     }
+    if(this.props.usersReducer.type!==n.usersReducer.type){
+      this.props.getUser()
+      
+    }
   }
   onAddNew = () => {
     Router.pushRoute('addUser')
   }
+ 
+  onDeleteUser=id=>{
+    this.props.deleteUser(id)
+  }
   render() {
     const { users } = this.state
-    console.log('render :', users);
-    
     return (
       <Layout>
         <Bound>
@@ -79,21 +86,27 @@ class MainUsers extends React.Component {
               <div className='headitem'>Full Name</div>
               <div className='headitem'>Job</div>
               <div className='headitem'>Phone</div>
+              <div className='headitem'>Action</div>
             </div>
             <div className='body-table'>
-              {users && users.map((user, index) => (
-                <div className='block-row' key={index}>
-                  <div className='humenitem'>{index + 1}</div>
-                  <div className='full-name '>
-                    <div className='avatar'>
-                      <img src={user.avatar} alt='user' />
+              {users && users.map((user, index) => {
+                return (
+                  <div className='block-row' key={index}>
+                    <div className='humenitem'>{index + 1}</div>
+                    <div className='full-name '>
+                      <div className='avatar'>
+                        <img src={user.avatar} alt='item' />
+                      </div>
+                      <p>{user.name}</p>
                     </div>
-                    <p>{user.name}</p>
+                    <div className='humenitem'>{user.job}</div>
+                    <div className='humenitem'>{user.phone}</div>
+                    <div className='humenitem'>
+                      <button onClick={()=>{this.onDeleteUser(user.id)}}>Delete</button>
+                    </div>
                   </div>
-                  <div className='humenitem'>{user.job}</div>
-                  <div className='humenitem'>{user.phone}</div>
-                </div>
-              ))
+                )
+              })
               }
             </div>
           </div>
@@ -104,11 +117,12 @@ class MainUsers extends React.Component {
 }
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(getUser()),
+  deleteUser: id => dispatch(deleteUser(id))
 })
 
 const mapStateToProps = (state) => {
   return {
-    usersReducer: state.testReducer
+    usersReducer: state.userReducer
   }
 }
 

@@ -5,7 +5,6 @@ export const getUser = () => ({
     type: types.GET_USER
 })
 export const getUserSuccess = (data) => {
-    
     return {
         type: types.GET_USER_SUCCESS,
         data
@@ -21,3 +20,13 @@ export const addUser = (name, job, phone) => {
         data: { name, job, phone }
     }
 }
+export const addUserSuccess=()=>({type: types.ADD_USER_SUCCESS})
+export const addUserfFail=()=>({type:types.ADD_USER_ERR})
+export const deleteUser=(id)=>{
+    return {
+        type: types.DELETE_USER,
+        data: id
+    }
+}
+export const deleteUserSuccess=()=>({type:types.DELETE_USER_SUCCESS})
+export const deleteUserFail=()=>({type:types.DELETE_USER_ERR})

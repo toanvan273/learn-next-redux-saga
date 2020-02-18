@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addUser } from '../../action/userAction'
+import { Router } from '../../routes'
 class Add extends React.Component {
   state = {}
   changeText = event => {
@@ -12,7 +13,15 @@ class Add extends React.Component {
   onSubmit = event => {
     event.preventDefault()
     const { name, job, phone } = this.state
-    this.props.dispatch(addUser(name, job, phone))
+    if(name&&job&&phone){
+      this.props.dispatch(addUser(name, job, phone))
+    }
+   
+  }
+  UNSAFE_componentWillReceiveProps(n){
+    if(this.props.userReducer!==n.userReducer){
+      Router.pushRoute('users')
+    }
   }
   render() {
     return (
@@ -29,4 +38,4 @@ class Add extends React.Component {
   }
 }
 
-export default connect()(Add)
+export default connect(state=>state)(Add)

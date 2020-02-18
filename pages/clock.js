@@ -14,9 +14,9 @@ class Clock extends React.Component {
     }
     componentDidMount(){
         this.props.dispatch(startClock())
-        // console.log('clock-did--mount', this.props);
     }
     render(){
+        console.log('clock--page');
         return (
             <Layout>
                 <Page />
