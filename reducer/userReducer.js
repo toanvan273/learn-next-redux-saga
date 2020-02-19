@@ -1,12 +1,12 @@
 import * as types from '../action/types'
 
-export const initialSate = {
+export const initialState = {
   data: null,
   type:null,
   err: null
 }
 
-export default function userReducer(state = initialSate, action) {
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case types.GET_USER_SUCCESS:
       return {

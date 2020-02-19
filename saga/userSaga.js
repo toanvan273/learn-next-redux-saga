@@ -16,8 +16,6 @@ function* getUserSaga() {
             console.log(res);
             const { data } = res
             yield put(actionUser.getUserSuccess(data))
-            // const list = yield select(state=>state.userReducer.data)
-            // console.log('list :',list);
         } catch (err) {
             console.log(err);
             yield put(actionUser.getUserErr(err))
