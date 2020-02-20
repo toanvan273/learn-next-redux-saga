@@ -69,4 +69,37 @@ B4: Viết Saga
         + Bocking: take, call
         + function: select, put, takeEvery, takeLatest, delay ...
     - Hiểu về Generator function và Yield trong javascript (https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Statements/function*)
-    
+    - VD về getUser
+        + Trong folder saga tạo 1 file userSaga.js
+        + tạo function* getUser(){
+            /**  **/
+             while (true) { 
+                 /** trong function* luôn dùng yield để thực hiện hàm sau nó xong, trả về kết quả, mới chạy hàm ở dưới **/
+                /** dùng hàm take để lắng nghe 1 action, cho đến khi action được gọi (action GET_USER), rồi mới chạy những hàm ở dưới **/
+                yield take(types.GET_USER) 
+                try {
+                    /** dùng axios để gọi api, có thể kết hợp helper call của saga để giao tiếp với api **/
+                    const res = yield Axios.get(apiGetUser)
+                    console.log(res);
+                    const { data } = res
+                    /** Khi có kết quả (res) trả về thì dispatch action getUserSuccess bằng hàm put**/
+                    yield put(actionUser.getUserSuccess(data))
+                } catch (err) {
+                    console.log(err);
+                    /** khi kết quả trả về lỗi thì dispatch action getUserErr**/
+                    yield put(actionUser.getUserErr(err))
+                }
+            }
+        }
+        + tạo hàm function* userSaga() để theo dõi tất cả các saga của user (bao gồm: getUser, addUser, updateUser và deleteUser)
+        + Cấu trúc function* userSaga() {
+            yield fork(getUser)
+        }
+        + export default userSaga
+        + Cuối cùng import userSaga vào file rootSaga.js
+
+B5: Kiểm tra lại luồng chạy tại page (Component)
+    - import {connect} từ 'react-redux', để kết nối component với store
+    - tạo 2 function: mapStateToProps và mapDispatchToProps để lấy các state trong store và dispatch các action
+    - dispatch action getUser tại componentDidMount()
+    - nhận new state tại UNSAFE_componentWillReceiveProps()

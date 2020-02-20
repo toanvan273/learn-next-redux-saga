@@ -61,7 +61,6 @@ class MainUsers extends React.Component {
     }
     if(this.props.usersReducer.type!==n.usersReducer.type){
       this.props.getUser()
-      
     }
   }
   onAddNew = () => {
@@ -73,6 +72,8 @@ class MainUsers extends React.Component {
   }
   render() {
     const { users } = this.state
+    // console.log('render :',this.props);
+    
     return (
       <Layout>
         <Bound>
